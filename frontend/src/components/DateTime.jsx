@@ -27,8 +27,6 @@ const ShowDateTimeSelector = ({className,objDateTime}) => {
       const dateTime = new Date(`${selectedDate}T${selectedTimeSlot}:00`);
       setDateTimeObject(dateTime);
       console.log("Selected Date and Time as Date Object:", dateTime);
-     setArrowClick(true);
-      
       // Add logic here to save or use the dateTime in your app
     }
 

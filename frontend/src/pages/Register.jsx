@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Btn from "../components/reusable-component/Button";
 import { useDispatch } from "react-redux";
 import { signup_In_admin_Database, signup_In_user_Database } from "../store/reducers/user-reducer";
+import { FaEye } from "react-icons/fa";
 const Register = ()=>{
 
     const navigate = useNavigate();
@@ -49,6 +50,8 @@ const Register = ()=>{
         }
     }
 
+    const [passwordHidden, setPasswordHidden] = useState(true);
+
     return(
         <div className="bg-[#242530] h-screen flex flex-col md:flex-row items-center sm:p-10">
                 <div className="w-[50%] rounded-md" data-aos="zoom-in">
@@ -62,28 +65,35 @@ const Register = ()=>{
  
                         </div>
 
-                        <form className="flex flex-col w-full" onSubmit={(e)=>e.preventDefault()}>
+                        <form className="flex flex-col w-full" onSubmit={handleSubmit}>
 
                         <label htmlFor="userName" className="text-white text-xl font-semibold">UserName:</label>
-                            <input type="text" placeholder="Enter your email" className=" px-8 py-2 rounded-md mb-6 mt-2 border-2  focus:outline-none text-white font-semibold border-[#3a3c4d] bg-transparent"
+                            <input type="name" placeholder="Enter your email" className=" px-8 py-2 rounded-md mb-6 mt-2 border-2  focus:outline-none text-white font-semibold border-[#3a3c4d] bg-transparent"
+                            required
                             name="userName"
                             value={formData.userName}
                             onChange={handleOnchange}/>
 
 
                             <label htmlFor="email" className="text-white text-xl font-semibold">Email:</label>
-                            <input type="text" placeholder="Enter your email" className=" px-8 py-2 rounded-md mb-6 mt-2 border-2  focus:outline-none text-white font-semibold border-[#3a3c4d] bg-transparent"
+                            <input type="email" placeholder="Enter your email" className=" px-8 py-2 rounded-md mb-6 mt-2 border-2  focus:outline-none text-white font-semibold border-[#3a3c4d] bg-transparent"
+                            required
                             name="email"
                             value={formData.email}
                             onChange={handleOnchange}/>
 
-                            <label htmlFor="password" className="text-white text-xl font-semibold">Password:</label>
-                            <input type="password" placeholder="Enter your password" className=" mt-1 px-8 py-2 rounded-md border-2 focus:outline-none border-[#3a3c4d] text-white font-semibold bg-transparent" 
-                            name="password"
-                            value={formData.password}
-                            onChange={handleOnchange}
+                                <div className="relative flex flex-col">
+                                     <label htmlFor="password" className="text-white text-xl font-semibold">Password:</label>
+                                    <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className=" mt-1 px-8 py-2 rounded-md border-2 focus:outline-none border-[#3a3c4d] text-white font-semibold bg-transparent" 
+                                    required
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleOnchange}
                             />
-                            <Btn onClick={handleSubmit} className="mt-4 hover:scale-110 transition-all duration-200">Signup</Btn>
+                                    <FaEye onClick={()=>setPasswordHidden(!passwordHidden)} className="absolute right-4 text-white bottom-3 cursor-pointer white "/>
+                                </div>
+
+                            <input  type="submit" value="Signup" className="px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md  border-4 hover:scale-110 transition-all duration-200  border-[#3a3b4d] mt-4"/>
                                <p className="mt-8 text-center text-gray-400">Already have an account?<Link to="/login" className="m-2 text-blue-500 cursor-pointer underline">Login</Link> </p>
                         </form>
                      

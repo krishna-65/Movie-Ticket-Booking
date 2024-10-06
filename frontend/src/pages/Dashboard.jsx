@@ -8,13 +8,26 @@ import Home from "./Home";
 import { login } from "../store/reducers/user-reducer";
 import { jwtDecode } from "jwt-decode";
 import AddMovie from "./AddMovie";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaAlignCenter } from "react-icons/fa";
 import AdminMovies from "../components/Admin-Movies";
+import { all_bookings } from "../api-handling/Apis-for-booking";
+import { getAllBookings_from_server } from "../store/reducers/Booking-Reducer";
 
 const Dashboard = ()=>{
 
-   
+    const dispatch = useDispatch();
+
+   useEffect(()=>{
+    const getAllBookings  = async()=>{
+        try{
+            const response = await dispatch(getAllBookings_from_server());
+        }catch(error){
+            console.log("Error in getting all bookings", error);
+        }
+    }
+    getAllBookings();
+   },[])
 
     const navigate = useNavigate();
 
@@ -61,10 +74,10 @@ const Dashboard = ()=>{
     return (
 
         <>
-       <div className="min-h-[100vh] bg-[#242530] flex flex-col gap-8 p-5 ">
+       <div className="min-h-[100vh]  bg-[#242530] flex flex-col gap-8 p-5 ">
 
             <div className="relative" data-aos="zoom-in">
-                    <div className="relative bg-[#3a3b4d] text-white mx-auto p-5 shadow rounded-md  w-[99%] flex justify-between items-center">
+                    <div className="relative bg-[#3a3b4d] hover:shadow-xl hover:shadow-[#00aaff66] text-white mx-auto p-5 shadow rounded-md  w-[90%] flex justify-between items-center">
                                 <FaAlignCenter onClick={()=>setHamburgerClicked(!hamburgerClicked)} className="text-2xl cursor-pointer"/>
                             <h1 data-aos="zoom-in" className="text-2xl  font-mono ml-8">Hey'<span className="text-[#daf0e0]"> {userName}<span/></span></h1>
                                 <div>
@@ -93,7 +106,7 @@ const Dashboard = ()=>{
                          {
                             currentBtn === "Home" ? <Home /> :  
                             currentBtn === "Movies" && user === "admin" ? <AdminMovies /> : 
-                            currentBtn === "Add Movie" ? <AddMovie /> : currentBtn === "Booking"?<Booking />:""
+                            currentBtn === "Add Movie" ? <AddMovie /> : currentBtn === "Bookings"?<Booking />:""
                         }
 
                     <div className={`transition-all duration-300 ${hamburgerClicked ? "hidden sm:w-[75vw] md:w-[80vw] lg:w-[85vw] sm:flex justify-end" : "w-full"}`}>

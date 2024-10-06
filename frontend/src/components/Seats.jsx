@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import { FaChair } from 'react-icons/fa'; // Importing chair icon from react-icons
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const SeatSelection = ({objSeat, className}) => {
   // State to keep track of selected 
  
+     
+      
 
-const {price,setPrice, selectedSeats, setSelectedSeats} = objSeat;
+const {dateTime,price,setPrice, selectedSeats, setSelectedSeats} = objSeat;
+
+
+const AllBookings = useSelector((state)=>state.booking.bookings);
+
+let utcDate = new Date(dateTime).toISOString();
+
+const {id} =useParams();
+const bookings =  AllBookings.filter(booking => (booking.movie === id && booking.date === utcDate));
+
 
     
   // Define total seats (5 rows and 10 seats per row)
@@ -48,12 +61,15 @@ const {price,setPrice, selectedSeats, setSelectedSeats} = objSeat;
     if (isSelected) {
       bgColor = '#00FF00'; // Selected seats have green color
     }
-
+    
+      const booked = bookings.some(booking => booking.seatNumber == index+1);
+          // console.log(booked);
     return (
       <div
         key={index}
+        disabled={booked} // Disable selected seats that are already booked
         onClick={() => handleSeatSelect(index)}
-        className="seat flex justify-center items-center cursor-pointer"
+        className={`seat ${booked ? 'booked opacity-30' : 'available'} flex justify-center items-center cursor-pointer`}
         style={{
           width: '50px',
           height: '50px',
@@ -61,6 +77,8 @@ const {price,setPrice, selectedSeats, setSelectedSeats} = objSeat;
           backgroundColor: bgColor,
           borderRadius: '5px',
           color: 'white',
+          pointerEvents: booked ? 'none' : 'auto', 
+          cursor: booked ? 'not-allowed' : 'pointer',
         }}
       >
         <FaChair size={24} />

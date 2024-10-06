@@ -16,7 +16,7 @@ const MovieDescription = () => {
     const { id } = useParams();
     const movie = movies.find(movie => movie._id === id);
 
-    const [user, setUser] = useState("user");
+    const [user, setUser] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -47,7 +47,7 @@ const MovieDescription = () => {
                     ))}
                 </div>
 
-                <Btn linkto={`/${movie._id}/details`} className={`${user === "admin" ? "opacity-50 cursor-not-allowed" : "hover:scale-110"} hover:scale-110 transition-all duration-300 mx-0 w-[50%] mt-10 bg-gradient-to-r from-[#00bfa5] to-[#3498db] hover:shadow-lg hover:shadow-[#2ecc7155] text-white py-2 rounded-md`}>
+                <Btn linkto={`/${movie._id}/details`} className={`${user === "admin" || user === "" ? "opacity-50 cursor-not-allowed pointer-events-none" : "hover:scale-110"} hover:scale-110 transition-all duration-300 mx-0 w-[50%] mt-10 bg-gradient-to-r from-[#00bfa5] to-[#3498db] hover:shadow-lg hover:shadow-[#2ecc7155] text-white py-2 rounded-md`}>
                     Book Now
                 </Btn>
             </div>

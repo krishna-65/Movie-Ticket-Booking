@@ -37,10 +37,10 @@ const Movies = ()=>{
       )
   return(
     <div >
-                <div className="w-[90vw] mx-auto p-10 ">
+                <div className="w-[90vw] mx-auto p-10  mt-10">
                         <h2 className="text-center font-semibold text-2xl text-white my-4" data-aos="zoom-in">Latest Release Movies</h2> 
 
-                    <div className="grid md:grid-cols-2 grid-cols-1 gap-10 ">
+                    <div className="grid md:grid-cols-2 grid-cols-1 gap-10 gap-y-20 ">
                      
                         {movies.map((movie,index)=>(
                             <Link to={`/${movie._id}/description`} key={index} data-aos="zoom-in">

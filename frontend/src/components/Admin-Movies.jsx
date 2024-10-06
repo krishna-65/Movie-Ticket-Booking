@@ -39,7 +39,7 @@ const AdminMovies = ()=>{
 
                         <h2 className="text-center font-semibold text-2xl text-white my-10" >My Movies</h2> 
 
-                       <div className="flex w-[90%] flex-wrap flex-shrink-0 justify-center gap-20 ">
+                       <div className="grid w-[90%] flex-wrap grid-cols-1 md:grid-cols-2  gap-20 ">
                         {movies.map((movie,index)=>(
                             <Link to={`/${movie._id}/description`} key={index}  >
                                   <MovieCart movie={movie}/>
