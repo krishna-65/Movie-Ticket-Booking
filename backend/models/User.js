@@ -1,3 +1,4 @@
+const { verify } = require('jsonwebtoken');
 const mongoose= require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -17,6 +18,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         minLength:6
     },
+
     bookings:[
         {
             type: mongoose.Schema.Types.ObjectId,
