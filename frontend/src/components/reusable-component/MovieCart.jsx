@@ -3,8 +3,7 @@
 import Aos from "aos";
 import { useEffect } from "react";
 import "aos/dist/aos.css"; // Make sure to import AOS styles
-import Btn from "./Button";
-import { Link } from "react-router-dom";
+
 
 const MovieCart = ({movie}) => {
   useEffect(() => {

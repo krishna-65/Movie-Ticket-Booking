@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Btn from "./reusable-component/Button";
 import Aos from "aos";
 import { useEffect, useState } from "react";
-import { MdAddLocationAlt } from "react-icons/md";
 import { jwtDecode } from "jwt-decode";
 
 const MovieDescription = () => {

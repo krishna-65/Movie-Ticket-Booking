@@ -1,7 +1,5 @@
 import Aos from "aos";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Btn from "../components/reusable-component/Button";
 import { addMovie, addMovieInServer } from "../store/reducers/movie-reducer";
 import { useDispatch } from "react-redux";
 const AddMovie = ()=>{

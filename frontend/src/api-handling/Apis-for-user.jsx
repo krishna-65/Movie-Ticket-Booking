@@ -1,10 +1,12 @@
 import axios from "axios";
-import Login from "../pages/Login";
+
+
+const API = "https://movie-ticket-booking-backend-7y20.onrender.com";
 
 export const AddUser = async(userData)=>{
     try{
 
-        const response = await axios.post('http://localhost:3001/user/signup',userData)
+        const response = await axios.post(`${API}/user/signup`,userData)
       
         return response.data;
 
@@ -20,7 +22,7 @@ export const AddUser = async(userData)=>{
 export const LoginUser = async(userData)=>{
     try{
         console.log(userData);
-        const response = await axios.post('http://localhost:3001/user/login', userData);
+        const response = await axios.post(`${API}/user/login`, userData);
         return response.data;
 
     }catch(error){
@@ -32,7 +34,7 @@ export const LoginUser = async(userData)=>{
 export const AddAdmin = async(userData)=>{
     try{
 
-        const response = await axios.post('http://localhost:3001/admin/signup',userData)
+        const response = await axios.post(`${API}/admin/signup`,userData)
         console.log('User added successfully', response.data);
         return response.data;
 
@@ -48,7 +50,7 @@ export const AddAdmin = async(userData)=>{
 export const LoginAdmin = async(userData)=>{
     try{
         console.log(userData);
-        const response = await axios.post('http://localhost:3001/admin/login', userData)
+        const response = await axios.post(`${API}/admin/login`, userData)
         console.log('User logged in successfully', response.data);
         return response.data;
 

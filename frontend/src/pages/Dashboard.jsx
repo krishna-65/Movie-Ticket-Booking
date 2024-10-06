@@ -1,17 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import Btn from "../components/reusable-component/Button";
 import Aos from "aos";
 import { useEffect, useState } from "react";
 import Booking from "../components/Booking";
 import Movies from "../components/Movies";
 import Home from "./Home";
-import { login } from "../store/reducers/user-reducer";
 import { jwtDecode } from "jwt-decode";
 import AddMovie from "./AddMovie";
 import { useDispatch, useSelector } from "react-redux";
 import { FaAlignCenter } from "react-icons/fa";
 import AdminMovies from "../components/Admin-Movies";
-import { all_bookings } from "../api-handling/Apis-for-booking";
 import { getAllBookings_from_server } from "../store/reducers/Booking-Reducer";
 
 const Dashboard = ()=>{

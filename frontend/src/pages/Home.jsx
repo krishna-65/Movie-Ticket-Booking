@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Movies from "../components/Movies";
 import Navbar from "../components/Navbar";
-import { getAllBookings_from_server } from "../store/reducers/Booking-Reducer";
+
 
 const Home = ()=>{
 
