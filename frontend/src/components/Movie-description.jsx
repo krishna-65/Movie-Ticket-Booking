@@ -24,7 +24,6 @@ const MovieDescription = () => {
             setUser(decodedToken.user);
         }
     }, []);
-    console.log(user);
 
     if (!movie) {
         return <p>Loading...</p>;} // Or handle error

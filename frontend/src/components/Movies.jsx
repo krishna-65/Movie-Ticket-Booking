@@ -16,7 +16,6 @@ const Movies = ()=>{
         const fun1 = async()=>{
           try{
                     const response = await dispatch(fetchMovies());
-                    console.log(response);
 
           }catch(error){
             console.log('error fetching movies', error);

@@ -37,7 +37,6 @@ const Dashboard = ()=>{
     const [currentBtn, setCurrentBtn] = useState("Home");
 
     const handleBtnClick = (btn) => {
-        console.log(btn.target.innerHTML);
         setCurrentBtn(btn.target.innerHTML);
         setHamburgerClicked(!hamburgerClicked)
     }
@@ -55,15 +54,16 @@ const Dashboard = ()=>{
     const [userName,setUserName] = useState('');
     const [hamburgerClicked, setHamburgerClicked] = useState(false);
 
-
     useEffect(()=>{
             const token = localStorage.getItem('token');
         if (token) {
             const decodedToken = jwtDecode(token);
-            console.log(decodedToken);
             setUser(decodedToken.user);
-            const name = decodedToken.name ;
+            const name = decodedToken.name;
             setUserName(name);
+        }
+        else{
+            navigate('/');
         }
     },[])
 

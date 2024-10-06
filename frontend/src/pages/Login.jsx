@@ -8,6 +8,7 @@ import { FaEye } from "react-icons/fa";
 
 
 const Login = () => {
+    const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
     const [user, setUser] = useState("User");
     const [formData, setFormData] = useState({
@@ -29,17 +30,30 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const [error,setError] = useState('');
+
     const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault(); // Prevent default form submission
 
         try {
             const response = user === "User"
                 ? await dispatch(login_In_user_Database(formData))
                 : await dispatch(login_In_admin_Database(formData));
-
+            
+           if(response.status === 200){
             localStorage.setItem('token', response.token);
             const decode = jwtDecode(response.token);
             navigate(`/dashboard/${decode.id}`);
+           }
+           else{
+            setError(response.response.data.message);
+            setLoading(false);
+            setFormData({
+                email: '',
+                password: ''
+            });
+           }
         } catch (error) {
             console.error("Error inside login component", error);
         }
@@ -82,8 +96,8 @@ const Login = () => {
                                 </div>
 
                     {/* Use a button for submission instead of an input element */}
-                    <input  type="submit" value="Login" className="px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md border-4 hover:scale-110 transition-all duration-200 border-[#3a3b4d] mt-4"/>
-                    
+                    <input  type="submit" value={loading ? 'Logging in...' : 'Login'} className={`px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md border-4 hover:scale-110 transition-all duration-200 border-[#3a3b4d] mt-4 ${loading ? "opacity-40 pointer-events-none":""}`}/>
+                    <p className="my-4 text-[#9e614a]  text-lg text-center font-bold">{error}</p>
                     <p className="mt-8 text-center text-gray-400">
                         Don't have an account?
                         <Link to="/register" className="m-2 text-blue-500 cursor-pointer underline">Signup</Link>

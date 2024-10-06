@@ -15,13 +15,14 @@ const Details = ()=>{
   
     const [arrowClick,setArrowClick] = useState(true);
 
+    const [loading, setLoading]  =useState(false);
+
   const  handleLeftArrowClick = ()=>{
     setArrowClick(false);
     setDateTime(null)
   }
 
   const  handleRightArrowClick = ()=>{
-    console.log(dateTime);
     if(dateTime)
     setArrowClick(true);
     
@@ -44,8 +45,7 @@ const Details = ()=>{
     }
     
       const date = new Date(dateTime);
-      const isoDate = date.toISOString();
-      console.log(isoDate); 
+      const isoDate = date.toISOString(); 
 
     let formattedDate;
    if(dateTime)
@@ -93,7 +93,7 @@ const navigate = useNavigate();
 
 const handleBookBtn = async()=>{
     try{  
-      
+          setLoading(true);
           const token  = localStorage.getItem("token");
           if(token){
            const decodeToken = jwtDecode(token);
@@ -129,7 +129,7 @@ return(
                   <div className="flex flex-col w-[90%] sm:w-[40%] lg:mx-0 mx-auto sm:flex-row gap-6 sm:gap-16 sm:items-center">
                     <p className="text-white text-lg mlr6">{formattedDate}</p>
                   <p className="text-white text-lg">₹{price}</p>
-                  <Btn className={`transition-all duration-200 ${selectedSeats.length>0 ? "opacity-100 hover:scale-110":"opacity-40"} font-bold text-lg md:px-8 border-[#232430]  `} onClick={handleBookBtn}>Book</Btn>
+                  <Btn className={`transition-all duration-200 ${selectedSeats.length>0 && loading === false ? "opacity-100 hover:scale-110":"opacity-40"}  font-bold text-lg md:px-8 border-[#2d2e3f]  `} onClick={handleBookBtn}>{loading ? "Booking" : "Book"}</Btn>
                   </div> 
             </div>
 

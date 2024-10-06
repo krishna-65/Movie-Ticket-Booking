@@ -17,9 +17,7 @@ export const getting_booking = async(userId)=>{
 
 export const movie_booking = async(data) =>{
     try{
-                console.log(data);
         const response = await axios.post(`${API}/booking/addbooking`,data);
-            console.log(response);
             return response.data.data;
     }catch(error){
         console.log("Error in movie_booking", error);

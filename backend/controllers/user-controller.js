@@ -42,7 +42,7 @@ exports.addUser = async(req,res) =>{
             if(existingUser) {
                 return res.status(400).json({
                     success:false,
-                    message: `User already exists with this email`,
+                    message: `Email Already Exists`,
                 })
             };
 
@@ -173,7 +173,7 @@ exports.login = async(req,res)=>{
          if(!user){
             return res.status(404).json({
                 success:false,
-            message: `User not found with this email`,     
+            message: `Email is not registered`,     
            })
          }
 
@@ -182,7 +182,7 @@ exports.login = async(req,res)=>{
         if(!isMatch){
             return res.status(404).json({
                 success: false,
-                message: 'Incorrect password',
+                message: 'Password is incorrect',
             })
         }
         let token;

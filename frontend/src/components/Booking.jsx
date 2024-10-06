@@ -16,7 +16,6 @@ const Booking = ()=>{
                     try{
                         const response  = await dispatch(getBooking_from_Server_for_user(decodedToken.id));
                         setBookings(response);
-                        console.log(bookings);
 
                     }catch(error){
                         console.log("Error in getting bookings",error);
@@ -25,7 +24,6 @@ const Booking = ()=>{
        }
        fun1();
     },[])
-    console.log(bookings);
     const movie = useSelector((state)=>state.movie.movies);
 
     if(!bookings)

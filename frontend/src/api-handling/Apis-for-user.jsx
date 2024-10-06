@@ -12,7 +12,7 @@ export const AddUser = async(userData)=>{
 
     }catch(error){
         console.error('Error adding user', error);
-        alert('Error adding user');
+        return error;
     }
     
 }
@@ -21,13 +21,12 @@ export const AddUser = async(userData)=>{
 
 export const LoginUser = async(userData)=>{
     try{
-        console.log(userData);
         const response = await axios.post(`${API}/user/login`, userData);
         return response.data;
 
     }catch(error){
         console.error('Error logging in user', error);
-        alert(error.response.data.message);
+        return error;
     }
 }
 
@@ -40,7 +39,7 @@ export const AddAdmin = async(userData)=>{
 
     }catch(error){
         console.error('Error adding user', error);
-        alert('Error adding user');
+        return error;
     }
     
 }
@@ -51,11 +50,10 @@ export const LoginAdmin = async(userData)=>{
     try{
         console.log(userData);
         const response = await axios.post(`${API}/admin/login`, userData)
-        console.log('User logged in successfully', response.data);
         return response.data;
 
     }catch(error){
         console.error('Error logging in user', error);
-        alert(error.response.data.message);
+        return error;
     }
 }

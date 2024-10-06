@@ -34,7 +34,6 @@ export const { getAllMovies, addMovie, getAdminMovies } = movieSlice.actions;
 export const fetchMovies = () => async (dispatch) => {
     try {
         const response = await getting_movies();
-        console.log(response);
        
         dispatch( getAllMovies(response.data)); // Dispatch the getMovies action with the fetched data
         return response.data;
@@ -45,7 +44,6 @@ export const fetchMovies = () => async (dispatch) => {
 
 export const addMovieInServer = (data) => async (dispatch) => {
     try {
-        console.log('Data to be added:', data);
         
         // Make API call to add the movie
         const response = await addMovie_api(data);

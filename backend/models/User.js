@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         minLength:6
     },
-
+    
     bookings:[
         {
             type: mongoose.Schema.Types.ObjectId,

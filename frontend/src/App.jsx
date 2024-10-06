@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedComponent";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import MovieDescription from "./components/Movie-description";
+import OTPInput from "./components/OTP_Verification";
 
 
 const App = ()=>{
@@ -35,6 +36,9 @@ const App = ()=>{
           const decodedToken = jwtDecode(token);
           navigate(`/dashboard/${decodedToken.id}`);  // Redirect to dashboard if token exists
         }
+        else{
+          navigate('/')
+        }
       },[])
 
       
@@ -51,6 +55,7 @@ const App = ()=>{
             <Route path="/addmovie" element={<AddMovie/>} />
             <Route path="dashboard" element={<Dashboard/>}/>
             <Route path="/:id/details" element={<Details/>}/>
+            <Route path="/otpverify" element={<OTPInput/>}/>
            </Routes>
     )
 }

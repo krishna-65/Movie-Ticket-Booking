@@ -2,15 +2,10 @@ import Aos from "aos";
 import { useEffect, useState } from "react";
 import { addMovie, addMovieInServer } from "../store/reducers/Movie-reducer";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const AddMovie = ()=>{
    
-    // const [user,setUser] = useState("User");
-
-    // const handleUserChange = (e)=>{
-          
-    //     setUser(e.target.innerHTML);
-    // }
-    
+  const [loading ,setLoading]  = useState(false);
 
     useEffect(()=>{
         Aos.init({duration: 1000});
@@ -62,7 +57,9 @@ const AddMovie = ()=>{
 
       const [movieAdded, setMovieAdded] = useState(false);
       const dispatch = useDispatch();
+      const navigate = useNavigate();
       const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();  
 
         if (formData.title && formData.releaseDate && formData.description) {
@@ -89,6 +86,7 @@ const AddMovie = ()=>{
                   featured: false,
                   description: ''
                 });
+                navigate("/dashboard");
               
             } catch (error) {
                 console.error('Error during movie addition:', error);
@@ -144,7 +142,7 @@ const AddMovie = ()=>{
                                             type="text"
                                             className=" mt-2 mb-6 px-8 py-2 rounded-md border-2 focus:outline-none border-[#3a3c4d] text-white font-semibold bg-transparent w-full" 
                                             placeholder="Enter actors names..."
-                                            required
+                                     
                                             name="actors"
                                             value={inputValue}
                                           onChange={(e) => setInputValue(e.target.value)}
@@ -195,7 +193,7 @@ const AddMovie = ()=>{
                             onChange={handleOnchange}></textarea>
 
                        
-                          <input  type="submit" value="Add Movie" className="px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md border-4 hover:scale-110 transition-all duration-200 border-[#3a3b4d] mt-4"/>
+                          <input  type="submit" value={loading ? 'Adding Movie...' : 'Add Movie'} className={`px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md border-4 hover:scale-110 transition-all duration-200 border-[#3a3b4d] mt-4 ${loading ? "opacity-40 pointer-events-none":""}`}/>
                               
                         </form>
                      

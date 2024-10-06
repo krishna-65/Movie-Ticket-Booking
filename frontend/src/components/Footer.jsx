@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
+import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -28,24 +27,24 @@ const Footer = () => {
             <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-gray-300">
               <li>
-                <Link to="/" className="hover:underline text-sm sm:text-md">
+                <a href="#home" className="hover:underline text-sm sm:text-md">
                   Home
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/about" className="hover:underline text-sm sm:text-md">
+                <a href="#about" className="hover:underline text-sm sm:text-md">
                   About Us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/movies" className="hover:underline text-sm sm:text-md">
+                <a href="#movies" className="hover:underline text-sm sm:text-md">
                   Latest Movies
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/contact" className="hover:underline text-sm sm:text-md">
+                <a href="#about" className="hover:underline text-sm sm:text-md">
                   Contact Us
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -78,9 +77,9 @@ const Footer = () => {
               <FaFacebook  className="text-xl sm:text-3xl"/>
               </a>
               <a href="https://twitter.com" className=" hover:text-white">
-              <FaTwitter  className="text-xl sm:text-3xl"/>
+              <FaLinkedin  className="text-xl sm:text-3xl"/>
               </a>
-              <a href="https://instagram.com" className=" hover:text-white">
+              <a href="https://www.instagram.com/krishna_52_/profilecard/?igsh=ZG1ycG8yaDN6dDBj" className=" hover:text-white">
               <FaInstagram  className="text-xl sm:text-3xl"/>
               </a>
             </div>

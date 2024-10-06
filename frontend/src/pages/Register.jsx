@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { signup_In_admin_Database, signup_In_user_Database } from "../store/reducers/User-reducer";
 import { FaEye } from "react-icons/fa";
 const Register = ()=>{
-
+        const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [user,setUser] = useState("User");
@@ -30,20 +30,33 @@ const Register = ()=>{
         setFormData({...formData,[e.target.name]:e.target.value});
     }
     const dispatch = useDispatch();
-
+    const [error,setError] = useState();
     const handleSubmit = async(e)=>{
+        setLoading(true);
         e.preventDefault();
         // Here you would send the form data to your backend for authentication
         try{
+            let response;
                     if(user==="User")
                     {
-                        const response = await dispatch(signup_In_user_Database(formData));
+                        response = await dispatch(signup_In_user_Database(formData));
                     }
                     else
                     {
-                        const response = await dispatch(signup_In_admin_Database(formData));
+                        response = await dispatch(signup_In_admin_Database(formData));
                     }
-                  navigate('/login');
+                  if(response.status === 200)
+                    navigate('/login');
+                else
+               {
+                setError(response.response.data.message);
+                setLoading(false);
+                setFormData({
+                    userName:'',
+                    email:'',
+                    password:''
+                })
+               }
         }catch(error){
             console.log("Error in form submission", error);
         }
@@ -52,7 +65,7 @@ const Register = ()=>{
     const [passwordHidden, setPasswordHidden] = useState(true);
 
     return(
-        <div className="bg-[#242530] h-screen flex flex-col md:flex-row items-center sm:p-10">
+        <div className="bg-[#242530] min-h-screen flex flex-col md:flex-row items-center sm:p-10">
                 <div className="w-[50%] rounded-md" data-aos="zoom-in">
                     <img src="https://www.shutterstock.com/image-photo/woman-holding-smartphone-buying-movie-600nw-2156185629.jpg" loading="lazy" alt="image" className="w-full h-full rounded-md shadow" />
                 </div>
@@ -92,7 +105,10 @@ const Register = ()=>{
                                     <FaEye onClick={()=>setPasswordHidden(!passwordHidden)} className="absolute right-4 text-white bottom-3 cursor-pointer white "/>
                                 </div>
 
-                            <input  type="submit" value="Signup" className="px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md  border-4 hover:scale-110 transition-all duration-200  border-[#3a3b4d] mt-4"/>
+                                <input  type="submit" value={loading ? 'Signing up...' : 'Sign up'} className={`px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md border-4 hover:scale-110 transition-all duration-200 border-[#3a3b4d] mt-4 ${loading ? "opacity-40 pointer-events-none":""}`}/>
+
+                                <p className="my-4 text-[#9e614a] text-center text-lg font-bold">{error}</p>
+
                                <p className="mt-8 text-center text-gray-400">Already have an account?<Link to="/login" className="m-2 text-blue-500 cursor-pointer underline">Login</Link> </p>
                         </form>
                      

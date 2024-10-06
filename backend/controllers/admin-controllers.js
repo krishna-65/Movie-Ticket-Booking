@@ -43,7 +43,7 @@ exports.addAdmin = async(req,res)=>{
             {
                 return res.status(400).json({
                     success:false,
-                    message: `Admin already exists with this email`,
+                    message: `Email Already Registered`,
                 })
             }
 
@@ -104,7 +104,7 @@ exports.adminLogin = async(req,res)=>{
         if(!user){
             return res.status(404).json({
                 success: false,
-                message: 'Admin not found',
+                message: 'Email is not registered',
             })
         }
 
@@ -113,7 +113,7 @@ exports.adminLogin = async(req,res)=>{
         if(!isMatch){
             return res.status(400).json({
                 success: false,
-                message: 'Incorrect password',
+                message: 'Password is incorrect',
             })
         }
 
