@@ -2,7 +2,7 @@ import Aos from "aos";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signup_In_admin_Database, signup_In_user_Database } from "../store/reducers/user-reducer";
+import { signup_In_admin_Database, signup_In_user_Database } from "../store/reducers/User-reducer";
 import { FaEye } from "react-icons/fa";
 const Register = ()=>{
 

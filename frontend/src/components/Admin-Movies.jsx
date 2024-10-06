@@ -3,7 +3,7 @@ import Aos from "aos";
 import MovieCart from "./reusable-component/MovieCart";
 import "aos/dist/aos.css";
 import { useDispatch, useSelector } from "react-redux";
-import {  get_Movie_Admin_Id } from "../store/reducers/movie-reducer";
+import {  get_Movie_Admin_Id } from "../store/reducers/Movie-reducer";
 import { Link, useParams } from "react-router-dom";
 
 

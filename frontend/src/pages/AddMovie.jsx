@@ -1,6 +1,6 @@
 import Aos from "aos";
 import { useEffect, useState } from "react";
-import { addMovie, addMovieInServer } from "../store/reducers/movie-reducer";
+import { addMovie, addMovieInServer } from "../store/reducers/Movie-reducer";
 import { useDispatch } from "react-redux";
 const AddMovie = ()=>{
    

@@ -3,7 +3,7 @@ import Aos from "aos";
 import MovieCart from "./reusable-component/MovieCart";
 import "aos/dist/aos.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies} from "../store/reducers/movie-reducer";
+import { fetchMovies} from "../store/reducers/Movie-reducer";
 import { Link } from "react-router-dom";
 
 const Movies = ()=>{
