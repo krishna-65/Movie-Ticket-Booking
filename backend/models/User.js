@@ -18,7 +18,14 @@ const userSchema = new mongoose.Schema({
         required:true,
         minLength:6
     },
-    
+    verificationToken:{
+        type:String,
+        default:null,
+    },
+    isVerified:{
+        type: Boolean,
+        default: false
+    },
     bookings:[
         {
             type: mongoose.Schema.Types.ObjectId,

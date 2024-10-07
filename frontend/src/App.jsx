@@ -37,8 +37,13 @@ const App = ()=>{
           navigate(`/dashboard/${decodedToken.id}`);  // Redirect to dashboard if token exists
         }
         else{
+          if(!localStorage.getItem("verify"))
           navigate('/')
         }
+        // else{
+        //   if(!localStorage.getItem('verify'));
+        //   navigate('/')
+        // }
       },[])
 
       
@@ -55,7 +60,7 @@ const App = ()=>{
             <Route path="/addmovie" element={<AddMovie/>} />
             <Route path="dashboard" element={<Dashboard/>}/>
             <Route path="/:id/details" element={<Details/>}/>
-            <Route path="/otpverify" element={<OTPInput/>}/>
+            <Route path="/verify/:token" element={<OTPInput/>}/>
            </Routes>
     )
 }

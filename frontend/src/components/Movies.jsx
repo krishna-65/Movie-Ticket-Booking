@@ -30,7 +30,7 @@ const Movies = ()=>{
 
        if(movies.length === 0)
         return (
-       <div className="flex justify-center items-center w-full text-white">
+       <div className="flex justify-center min-h-[500px] items-center w-full text-white">
               <p className="text-2xl font-semibold">Loading...</p>
        </div>
       )

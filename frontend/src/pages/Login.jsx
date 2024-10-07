@@ -41,7 +41,7 @@ const Login = () => {
                 ? await dispatch(login_In_user_Database(formData))
                 : await dispatch(login_In_admin_Database(formData));
             
-           if(response.status === 200){
+           if(response.status === 200 || response.success === true){
             localStorage.setItem('token', response.token);
             const decode = jwtDecode(response.token);
             navigate(`/dashboard/${decode.id}`);
@@ -61,7 +61,7 @@ const Login = () => {
     const [passwordHidden, setPasswordHidden] = useState(true)
 
     return (
-        <div className="bg-[#242530] h-screen flex flex-col md:flex-row items-center sm:p-10">
+        <div className="bg-[#242530] min-h-screen flex flex-col md:flex-row items-center sm:p-10">
             <div className="w-[50%] rounded-md" data-aos="zoom-in">
                 <img src="https://www.shutterstock.com/image-photo/woman-holding-smartphone-buying-movie-600nw-2156185629.jpg" loading="lazy" alt="image" className="w-full h-full rounded-md shadow" />
             </div>

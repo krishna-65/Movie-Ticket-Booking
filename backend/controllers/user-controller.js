@@ -2,7 +2,8 @@
 const User = require('../models/User');
 const sendEmail = require('./sentEmail');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+require("dotenv").config();
 exports.getAllUsers = async(req,res)=>{
     try{
             const users = await User.find();
@@ -25,52 +26,119 @@ exports.getAllUsers = async(req,res)=>{
     }
 }
 
-exports.addUser = async(req,res) =>{
+exports.addUser = async (req, res) => {
+    try {
+        const { userName, email, password } = req.body;
 
-    try{
-            const {userName,email,password} = req.body;
-            if(!userName || !email || !password)
-            {
-                return res.status(422).json({
-                    success:false,
-                    message: 'Please provide all fields',
-                })
-            }
+        // Check if required fields are provided
+        if (!userName || !email || !password) {
+            return res.status(422).json({
+                success: false,
+                message: 'Please provide all fields',
+            });
+        }
 
-            const existingUser = await User.findOne({email});
+        // Check if the user already exists
+        const existingUser = await User.findOne({ email });
 
-            if(existingUser) {
-                return res.status(400).json({
-                    success:false,
-                    message: `Email Already Exists`,
-                })
-            };
+        // If user exists and is verified, return an error
+        if (existingUser && existingUser.isVerified) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email already exists',
+            });
+        }
 
-            let hashedpassword;
-                 hashedpassword = await bcrypt.hash(password, 10);
-            
-            const user = await new User({userName,email,password:hashedpassword,booking:[]}).save();
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        let user;
 
-            sendEmail(email, 'Account created successfully', `
-                <h2>Thank you ${userName} for creating account!</h2>
+        // If the user does not exist, create a new one
+        if (!existingUser) {
+            user = new User({
+                userName,
+                email,
+                password: hashedPassword,
+                booking: [],
+            });
+        } else {
+            // If the user exists but isn't verified, use the existing user
+            user = existingUser;
+        }
+
+        // Generate a verification token with an expiration time of 10 minutes
+        const verificationToken = jwt.sign(
+            { id: user._id },
+            process.env.SECRET_KEY, // Correctly access SECRET_KEY
+            { expiresIn: '10m' }
+        );
+
+        // Save the verification token to the user object
+        user.verificationToken = verificationToken;
+        await user.save();
+
+        // Send verification email
+        const verificationLink = `${process.env.API_URL}/verify/${verificationToken}`;
+        await sendEmail(
+            user.email,
+            'Verify your email',
+            `
+            <h2>Thanks for visiting</h2>
+            <p>Please verify your email by clicking the link below:${verificationLink}</p>
+            `
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: 'Check your email for email verification',
+        });
+
+    } catch (error) {
+        console.error('Error in signup:', error); // Log the error for debugging
+        return res.status(500).json({
+            success: false,
+            message: 'Server error in signup',
+            error: error.message,
+        });
+    }
+};
+
+exports.verifyAccount =  async (req, res) => {
+    const { token } = req.params;
+
+    try {
+        console.log("hi");
+      
+        const decoded = jwt.verify(token, process.env.SECRET_KEY); // This will throw an error if the token is expired
+        const user = await User.findById(decoded.id);
+       
+        if (!user) {
+            return res.status(400).json({ message: "Email is not registered" });
+        }
+            console.log("hi");
+        user.isVerified = true;
+        user.verificationToken = null; // Clear the token
+        await user.save();
+
+       sendEmail(user.email, 'Account created successfully', `
+                <h2>Thank you ${user.userName} for creating account!</h2>
+                <p>Visit login page for continue : ${process.env.API_URL}/user/login <p>
                 <p>Enjoy your day!</p>
             `);
             
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
                 message: 'User registered successfully',
                 user,
             })
             
-
-    }catch(error){
-        return res.status(500).json({
-            success:false,
-            message: `server error in signup`,
-            error,
-        })
+    } catch (error) {
+console.log(error);
+        res.status(400).json({ message: "Invalid or expired token" ,error: error });
     }
-}
+};
+
+
 exports.updateUser = async(req,res)=>{
     try{
             const id = req.params.id;
@@ -185,6 +253,14 @@ exports.login = async(req,res)=>{
                 message: 'Password is incorrect',
             })
         }
+
+            if(!user.isVerified){
+                return res.status(403).json({
+                    success: false,
+                    message: 'Email is not verified, please verify your email',
+                })     // Account is not verified, return 403 status code with error message
+            }
+
         let token;
 
         try{

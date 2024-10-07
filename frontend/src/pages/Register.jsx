@@ -24,7 +24,7 @@ const Register = ()=>{
         email:'',
         password:''
     })
-
+    const [res,setRes]  =useState('');
     const handleOnchange = (e)=>{
 
         setFormData({...formData,[e.target.name]:e.target.value});
@@ -45,8 +45,17 @@ const Register = ()=>{
                     {
                         response = await dispatch(signup_In_admin_Database(formData));
                     }
-                  if(response.status === 200)
-                    navigate('/login');
+                  if(response.status === 200 || response.success === true)
+                  {
+                    localStorage.setItem("verify",true);
+                    setLoading(false);
+                    setFormData({
+                        userName:'',
+                        email:'',
+                        password:''
+                    })
+                    setRes('Check your email for verification');
+                  }
                 else
                {
                 setError(response.response.data.message);
@@ -106,7 +115,7 @@ const Register = ()=>{
                                 </div>
 
                                 <input  type="submit" value={loading ? 'Signing up...' : 'Sign up'} className={`px-6 md:px-16 mx-auto  py-2 text-white bg-transparent rounded-md border-4 hover:scale-110 transition-all duration-200 border-[#3a3b4d] mt-4 ${loading ? "opacity-40 pointer-events-none":""}`}/>
-
+                                <p className="my-4 text-green-600 font-bold text-center text-lg">{res}</p>
                                 <p className="my-4 text-[#9e614a] text-center text-lg font-bold">{error}</p>
 
                                <p className="mt-8 text-center text-gray-400">Already have an account?<Link to="/login" className="m-2 text-blue-500 cursor-pointer underline">Login</Link> </p>

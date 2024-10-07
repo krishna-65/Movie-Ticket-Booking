@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-const API = "https://movie-ticket-booking-backend-7y20.onrender.com";
-
+// const API = "https://movie-ticket-booking-backend-7y20.onrender.com";
+const API = "http://localhost:3001"
 export const AddUser = async(userData)=>{
     try{
 
@@ -35,7 +35,7 @@ export const AddAdmin = async(userData)=>{
 
         const response = await axios.post(`${API}/admin/signup`,userData)
         console.log('User added successfully', response.data);
-        return response.data;
+        return response;
 
     }catch(error){
         console.error('Error adding user', error);

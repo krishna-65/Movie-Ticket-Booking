@@ -1,60 +1,59 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const OTPInput = ({ length, onOTPChange, onSubmit }) => {
-  const [otp, setOtp] = useState(new Array(length).fill(""));
+const VerifyAccount = () => {
+  const [isVerified, setIsVerified] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const {token}  = useParams(); // Assuming the token is stored in localStorage
 
-  const handleChange = (e, index) => {
-    const value = e.target.value;
-    if (/^[0-9]$/.test(value) || value === "") {
-      const newOtp = [...otp];
-      newOtp[index] = value;
-      setOtp(newOtp);
-      onOTPChange(newOtp.join(""));
-      
-      // Automatically focus next input if valid input is entered
-      if (value !== "" && index < length - 1) {
-        document.getElementById(`otp-input-${index + 1}`).focus();
+  useEffect(() => {
+    const verifyAccount = async () => {
+      try {
+        // Make a GET request to verify the token
+        const response = await axios.get(`http://localhost:3001/user/verify/${token}`);
+
+        // Check if the response is successful
+        if (response.status === 200 && response.data.success) {
+          setIsVerified(true);
+          // Wait for 2 seconds before navigating to login page
+          setTimeout(() => {
+            localStorage.removeItem("verifyToken");
+            navigate('/login');
+          }, 2000);
+        } else {
+          // If response status is not 200, handle failure case
+          throw new Error("Verification failed");
+        }
+      } catch (err) {
+        // Handle error and failed verification
+        setError(err.response?.data?.message || "Verification failed");
+        setIsVerified(false);
+
+        // Remove token and navigate to signup page after 2 seconds
+        setTimeout(() => {
+          localStorage.removeItem("verifyToken");
+          navigate('/register'); // Navigate to signup (register) page
+        }, 2000);
       }
-    }
-  };
+    };
 
-  const handleKeyDown = (e, index) => {
-    if (e.key === "Backspace" && otp[index] === "" && index > 0) {
-      document.getElementById(`otp-input-${index - 1}`).focus();
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(otp.join(""));
-  };
+    // Call the function to verify the account
+    verifyAccount();
+  }, [token, navigate]);
 
   return (
-    <div className="otp-container flex flex-col items-center">
-      <h2 className="text-2xl font-bold text-gray-700 mb-6">Enter OTP</h2>
-      <form onSubmit={handleSubmit} className="flex space-x-3 mb-4">
-        {otp.map((value, index) => (
-          <input
-            key={index}
-            id={`otp-input-${index}`}
-            type="text"
-            className="w-12 h-12 text-xl text-center border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-150 ease-in-out"
-            maxLength="1"
-            value={value}
-            onChange={(e) => handleChange(e, index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            autoFocus={index === 0}
-          />
-        ))}
-      </form>
-      <button
-        className="bg-blue-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 transition duration-150 ease-in-out"
-        onClick={handleSubmit}
-      >
-        Submit OTP
-      </button>
+    <div className='text-white bg-[#242530] min-h-screen flex justify-center items-center'>
+      {isVerified ? (
+        <p>Verification successful! Redirecting to login...</p>
+      ) : error ? (
+        <p>Verification failed: {error}. Redirecting to signup...</p>
+      ) : (
+        <p>Verifying account...</p>
+      )}
     </div>
   );
 };
 
-export default OTPInput;
+export default VerifyAccount;
