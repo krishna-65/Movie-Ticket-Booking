@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-// const API = "https://movie-ticket-booking-backend-7y20.onrender.com";
-const API = "http://localhost:3001"
+const API = "https://movie-ticket-booking-backend-7y20.onrender.com";
+
 export const AddUser = async(userData)=>{
     try{
 
