@@ -7,7 +7,7 @@ const Review = ({userLogin,userId}) => {
   console.log(userId);
   useEffect(()=>{
     Aos.init({duration:1000})
-  })
+  },[])
 
   useEffect(() => {
     const getAllReviews = async () => {

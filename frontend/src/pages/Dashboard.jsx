@@ -44,8 +44,7 @@ const Dashboard = ()=>{
     const handleSignOut = ()=>{
         const token = localStorage.getItem("token");
         if(token)
-        localStorage.removeItem("token");
-        
+        localStorage.removeItem("token");  
         navigate("/");
 
     }
@@ -60,15 +59,14 @@ const Dashboard = ()=>{
         if (token) {
             const decodedToken = jwtDecode(token);
             setUser(decodedToken.user);
-            const name = decodedToken.name;
+            const name = decodedToken.name.split(" ")[0]||decodedToken.name;
             setUserName(name);
         }
         else{
             navigate('/');
         }
-    },[])
+    },)
 
-  setUserName(userName.split(" ")[0]||userName);
     
     return (
 
