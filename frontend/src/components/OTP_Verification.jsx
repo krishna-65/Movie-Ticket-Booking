@@ -15,7 +15,7 @@ const VerifyAccount = () => {
         const response = await axios.get(`https://movie-ticket-booking-backend-7y20.onrender.com/user/verify/${token}`);
 
         // Check if the response is successful
-        if (response.status === 200 && response.data.success) {
+        if (response.status === 200 || response.success === true) {
           setIsVerified(true);
           // Wait for 2 seconds before navigating to login page
           setTimeout(() => {
