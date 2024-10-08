@@ -68,7 +68,7 @@ const Dashboard = ()=>{
         }
     },[])
 
-  
+  setUserName(userName.split(" ")[0]||userName);
     
     return (
 
@@ -92,7 +92,7 @@ const Dashboard = ()=>{
                                     <Btn onClick={handleBtnClick}>Home</Btn>
                                     <Btn onClick={handleBtnClick}>Movies</Btn>
                                     <Btn className={`${user === "admin"? "block": "hidden"} px-11`} onClick={handleBtnClick}>Add Movie</Btn>
-                                   <Btn onClick={handleBtnClick}>Bookings</Btn>
+                                   <Btn onClick={handleBtnClick} className={`${user === "admin"? "hidden": "block"}`}>Bookings</Btn>
                                    <div data-aos="zoom-in"> <Btn onClick={handleSignOut} className="hover:scale-110 transition-all duration-200  sm:hidden text-red-400 border-red-400" >Sign Out</Btn></div>
                             </div>
 
