@@ -17,10 +17,12 @@ const movieRouter = require('./routes/movies-routes');
 const userRouter = require('./routes/user-routes');
 const adminRouter = require('./routes/admin-routes');
 const bookingRouter = require('./routes/booking-routes');
+const reviewRouter = require('./routes/review-routes');
 app.use('/admin',adminRouter);
 app.use('/user',userRouter);
 app.use('/movie', movieRouter);
 app.use('/booking',bookingRouter);
+app.use('/review',reviewRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`);

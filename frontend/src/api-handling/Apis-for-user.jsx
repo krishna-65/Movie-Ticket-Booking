@@ -57,3 +57,18 @@ export const LoginAdmin = async(userData)=>{
         return error;
     }
 }
+
+
+export const addReview = async(data)=>{
+    try{
+        console.log(data);
+        const response = await axios.post(`${API}/review`, data)
+        return response.data;
+
+    }catch(error){
+        console.error('Error Adding Review', error);
+        return error;
+    }
+}
+
+

@@ -28,7 +28,7 @@ const Movies = ()=>{
      Aos.init({duration: 1000});
   },[])
 
-       if(movies.length === 0)
+       if(!movies)
         return (
        <div className="flex justify-center min-h-[500px] items-center w-full text-white">
               <p className="text-2xl font-semibold">Loading...</p>

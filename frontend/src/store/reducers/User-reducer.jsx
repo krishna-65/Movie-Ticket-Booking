@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AddAdmin, AddUser, LoginAdmin, LoginUser } from "../../api-handling/Apis-for-user";
+import { AddAdmin, AddUser, LoginAdmin, LoginUser ,addReview} from "../../api-handling/Apis-for-user";
 
 
 const initialState = {
@@ -17,6 +17,9 @@ const userSlice = createSlice({
         },
         signup:(state,action)=>{
             state.user = action.payload;
+        },
+        review:(state,action)=>{
+                state.user.reviews.push(action.payload); // Add a new review to the user's list
         }
     }
 })
@@ -59,13 +62,23 @@ export const signup_In_admin_Database = (data)=>async(dispatch)=>{
     try{
                 const response = await AddAdmin(data);
                 if(response.status === 200)
-               { dispatch(signup(response.data));}
+               { dispatch(review(response.data));}
                 return response;
     }catch(error){
         console.log("Error in signup_In_Database", error);
     }
 }
 
+export const AddReview = (data)=>async(dispatch)=>{
+    try{
+        const response = await addReview(data);
+        if(response.status === 200)
+            { dispatch(signup(response.data));}
+        return response;
+    }catch(error){
+        console.log("Error in adding review", error);
+    }
+} 
 
 
 export default userSlice.reducer;

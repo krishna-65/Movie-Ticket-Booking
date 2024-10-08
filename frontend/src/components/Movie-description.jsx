@@ -28,6 +28,8 @@ const MovieDescription = () => {
     if (!movie) {
         return <p>Loading...</p>;} // Or handle error
 
+        console.log(user);
+
     return (
         <div className="min-h-screen w-[100vw] bg-gradient-to-r from-[#0a0d1c] to-[#2c3e50] flex flex-col md:flex-row gap-10 p-10 items-center justify-center">
             <div className="w-[90%] md:w-[50%] h-[300px] sm:h-[500px] lg:p-10 rounded-md transition-transform duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00aaff66]" data-aos="zoom-in">
@@ -45,9 +47,14 @@ const MovieDescription = () => {
                     ))}
                 </div>
 
-                <Btn linkto={`/${movie._id}/details`} className={`${user === "admin" || user === "" ? "opacity-50 cursor-not-allowed pointer-events-none" : "hover:scale-110"} hover:scale-110 transition-all duration-300 mx-0 w-[50%] mt-10 bg-gradient-to-r from-[#00bfa5] to-[#3498db] hover:shadow-lg hover:shadow-[#2ecc7155] text-white py-2 rounded-md`}>
+                <Btn linkto={`/${movie._id}/details`}className={`${user==="admin"?"hidden":"block"} hover:scale-110 transition-all duration-300 mx-0 w-[50%] mt-10 bg-gradient-to-r from-[#00bfa5] to-[#3498db] hover:shadow-lg hover:shadow-[#2ecc7155] text-white py-2 rounded-md`}>
                     Book Now
                 </Btn>
+
+                <Btn linkto={`/${movie._id}/movie/bookings`} className={`${user==="admin"?"block":"hidden"} hover:scale-110 transition-all duration-300 mx-0  mt-10 bg-gradient-to-r from-[#00bfa5] to-[#3498db] hover:shadow-lg hover:shadow-[#2ecc7155] text-white py-2 rounded-md`}>
+                    See All Bookings
+                </Btn>
+            
             </div>
         </div>
     );

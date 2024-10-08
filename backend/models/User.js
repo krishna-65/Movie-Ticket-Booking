@@ -32,8 +32,11 @@ const userSchema = new mongoose.Schema({
             ref: 'Booking',
             required:true,
         }
-    ]
-    
+    ],
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'  // Reference to the Review model
+      }]
 
 })
 

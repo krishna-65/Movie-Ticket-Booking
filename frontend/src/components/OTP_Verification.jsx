@@ -19,7 +19,7 @@ const VerifyAccount = () => {
           setIsVerified(true);
           // Wait for 2 seconds before navigating to login page
           setTimeout(() => {
-            localStorage.removeItem("verifyToken");
+            localStorage.removeItem("verify");
             navigate('/login');
           }, 2000);
         } else {
@@ -33,7 +33,7 @@ const VerifyAccount = () => {
 
         // Remove token and navigate to signup page after 2 seconds
         setTimeout(() => {
-          localStorage.removeItem("verifyToken");
+          localStorage.removeItem("verify");
           navigate('/register'); // Navigate to signup (register) page
         }, 2000);
       }
@@ -44,7 +44,7 @@ const VerifyAccount = () => {
   }, [token, navigate]);
 
   return (
-    <div className='text-white bg-[#242530] min-h-screen flex justify-center items-center'>
+    <div className='text-white bg-[#242530] min-h-screen flex justify-center items-center text-xl font-mono font-semibold'>
       {isVerified ? (
         <p>Verification successful! Redirecting to login...</p>
       ) : error ? (

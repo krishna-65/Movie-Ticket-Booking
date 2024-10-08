@@ -10,6 +10,10 @@ import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import MovieDescription from "./components/Movie-description";
 import OTPInput from "./components/OTP_Verification";
+import Review_form from "./components/User-review-form";
+import Movie_bookings from "./components/Movie-bookings";
+
+
 
 
 const App = ()=>{
@@ -59,9 +63,12 @@ const App = ()=>{
             <Route path="/:id/description" element={<MovieDescription/>} />
             <Route path="/addmovie" element={<AddMovie/>} />
             <Route path="dashboard" element={<Dashboard/>}/>
+            <Route path="/:id/movie/bookings" element={<Movie_bookings/>}/>
             <Route path="/:id/details" element={<Details/>}/>
             <Route path="/verify/:token" element={<OTPInput/>}/>
+            <Route path="/addreview" element={<Review_form/>} />
            </Routes>
     )
 }
 export default App;
+

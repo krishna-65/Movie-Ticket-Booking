@@ -11,14 +11,21 @@
   animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
+@keyframes slide {
   0% {
-    transform: rotate(0deg);
+    transform: translateX(0);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translateX(-50%);
   }
 }
+
+.animate-slide-loop {
+  display: flex;
+  animation: slide 15s linear infinite;
+}
+
+
 
 
 /* :root {
