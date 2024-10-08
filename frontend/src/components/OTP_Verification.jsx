@@ -12,7 +12,7 @@ const VerifyAccount = () => {
     const verifyAccount = async () => {
       try {
         // Make a GET request to verify the token
-        const response = await axios.get(`http://localhost:3001/user/verify/${token}`);
+        const response = await axios.get(`https://movie-ticket-booking-backend-7y20.onrender.com/user/verify/${token}`);
 
         // Check if the response is successful
         if (response.status === 200 && response.data.success) {
@@ -28,6 +28,7 @@ const VerifyAccount = () => {
         }
       } catch (err) {
         // Handle error and failed verification
+        console.log(err);
         setError(err.response?.data?.message || "Verification failed");
         setIsVerified(false);
 
@@ -35,7 +36,7 @@ const VerifyAccount = () => {
         setTimeout(() => {
           localStorage.removeItem("verify");
           navigate('/register'); // Navigate to signup (register) page
-        }, 2000);
+        }, 10000);
       }
     };
 
@@ -44,7 +45,7 @@ const VerifyAccount = () => {
   }, [token, navigate]);
 
   return (
-    <div className='text-white bg-[#242530] min-h-screen flex justify-center items-center text-xl font-mono font-semibold'>
+    <div className='text-white bg-[#242530] min-h-screen w-[100vw] flex justify-center items-center text-xl font-mono font-semibold'>
       {isVerified ? (
         <p>Verification successful! Redirecting to login...</p>
       ) : error ? (
