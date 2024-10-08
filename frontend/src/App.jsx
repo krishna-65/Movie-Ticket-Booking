@@ -66,7 +66,7 @@ const App = ()=>{
             <Route path="/:id/movie/bookings" element={<Movie_bookings/>}/>
             <Route path="/:id/details" element={<Details/>}/>
             <Route path="/verify/:token" element={<OTPInput/>}/>
-            <Route path="/addreview" element={<Review_form/>} />
+            <Route path="/:id/addreview" element={<Review_form/>} />
            </Routes>
     )
 }

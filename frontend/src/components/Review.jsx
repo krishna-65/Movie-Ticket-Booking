@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Aos from 'aos'
-const Review = ({userLogin}) => {
+const Review = ({userLogin,userId}) => {
   const [reviews, setReviews] = useState([]);
-
+  console.log(userId);
   useEffect(()=>{
     Aos.init({duration:1000})
   })
@@ -74,7 +74,7 @@ const Review = ({userLogin}) => {
           <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#242530] to-transparent pointer-events-none"></div>
         </div>
 
-        <Link to="/addreview" className={`${userLogin ? "block" :"hidden"} hover:scale-110 transition-all duration-200 px-6 py-2 font-semibold bg-transparent border-[#3a3b4d] border-4 mt-6 `}>
+        <Link to={`/${userId}/addreview`} className={`${userLogin ? "block" :"hidden"} hover:scale-110 transition-all duration-200 px-6 py-2 font-semibold bg-transparent border-[#3a3b4d] border-4 mt-6 `}>
           Add Review
         </Link>
       </div>
