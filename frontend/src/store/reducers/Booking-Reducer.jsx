@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { all_bookings, getting_booking, movie_booking } from "../../api-handling/Apis-for-booking";
+import axios from "axios";
 
 
 const initialState = {
@@ -20,12 +21,17 @@ const bookingSlice = createSlice({
         },
         getAllBookings:(state,action)=>{
             state.bookings = action.payload; // Update the bookings array
+        },
+        cancle:(state,action)=>{
+            state.bookings.pop(action.payload);
+            state.userBooking.pop(action.payload); // Remove the canceled booking from the user's booking list
         }
+        
         
     }
 });
 
-export const {book,getUserBooking, getAllBookings} = bookingSlice.actions;
+export const {book,getUserBooking, getAllBookings,cancle} = bookingSlice.actions;
 
 export const getAllBookings_from_server = () => async(dispatch) =>{
     try{
@@ -51,7 +57,8 @@ export const getBooking_from_Server_for_user = (data) => async(dispatch) =>{
 export const movie_booking_in_Server = (data)=>async(dispatch)=>{
     try{
         const response = await movie_booking(data);
-        dispatch(book(response));
+        if(response.data.status ===200 || response.data.success === true) {
+        dispatch(book(response));}
         return response; // Dispatch the book action with the fetched data
 
     }catch(error){
@@ -59,4 +66,20 @@ export const movie_booking_in_Server = (data)=>async(dispatch)=>{
     }
 }
 
+export const cancleBooking = (id)=>async(dispatch)=>{
+        try{
+       
+                const response = await axios.delete(`https://movie-ticket-booking-backend-7y20.onrender.com/booking/delete/${id}`)
+                dispatch(cancle(response.data));
+                return response.data;
+
+        }catch(error){
+            console.log("Error in cancleBooking", error);
+        }
+}
+
+
+
 export default bookingSlice.reducer;
+
+

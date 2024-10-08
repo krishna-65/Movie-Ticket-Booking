@@ -27,12 +27,17 @@ const AdminMovies = ()=>{
      Aos.init({duration: 1000});
   },[])
 
-       if(movies.length === 0)
+       if(!movies)
         return (
        <div className="flex justify-center items-center w-full text-white">
               <p className="text-2xl font-semibold">Loading...</p>
        </div>
       )
+      if(movies.length === 0){
+        return (  <div className="w-full h-[80vh] flex justify-center items-center">
+               <h1 className="text-[#ebedf2] font-semibold text-2xl">No Booking Available</h1>
+         </div>)
+      }
   return(
     <div >
                 <div className="w-[90vw] mx-auto p-10">

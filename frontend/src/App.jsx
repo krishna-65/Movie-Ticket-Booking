@@ -12,6 +12,8 @@ import MovieDescription from "./components/Movie-description";
 import OTPInput from "./components/OTP_Verification";
 import Review_form from "./components/User-review-form";
 import Movie_bookings from "./components/Movie-bookings";
+import Cancle_booking from "./components/Cancle-booking";
+import QRCodeGenerator from "./components/QR-generator";
 
 
 
@@ -67,6 +69,8 @@ const App = ()=>{
             <Route path="/:id/details" element={<Details/>}/>
             <Route path="/verify/:token" element={<OTPInput/>}/>
             <Route path="/:id/addreview" element={<Review_form/>} />
+            <Route path="/canclebooking/:id" element={<Cancle_booking/>}/>
+            <Route path = "/generateqr/:id" element = {<QRCodeGenerator/>}/>
            </Routes>
     )
 }

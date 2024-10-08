@@ -6,7 +6,7 @@ const bookingRouter = express.Router();
 bookingRouter.post('/addbooking',newBooking);
 bookingRouter.get('/:id',getBookingById);
 bookingRouter.get('/',getAllBookings);
-bookingRouter.delete('/delete',cancelBooking);
+bookingRouter.delete('/delete/:id',cancelBooking);
 //get booking by movie id and datetime
 bookingRouter.get('/getbooking/:id',getBookingByIdAndDatetime);
 

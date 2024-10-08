@@ -148,10 +148,11 @@ exports.getAllBookings = async(req,res)=>{
     }
 }
 
+
 exports.cancelBooking = async(req,res)=>{
     try{
-
         const booking = await Booking.findOneAndDelete(req.params.id).populate("user movie");
+
 
         const session  = await mongoose.startSession();
         session.startTransaction();
@@ -160,6 +161,12 @@ exports.cancelBooking = async(req,res)=>{
         await booking.user.save({session});
         await booking.movie.save({session});
         session.commitTransaction();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Booking cancelled successfully',
+            data: booking,
+        })
 
         
 
