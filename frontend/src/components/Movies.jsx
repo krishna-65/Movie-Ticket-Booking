@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies} from "../store/reducers/Movie-reducer";
 import { Link } from "react-router-dom";
 
-const Movies = ()=>{
+const Movies = ({hamburgerClicked})=>{
 
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movie.movies); // Access the movies from state
@@ -42,8 +42,9 @@ const Movies = ()=>{
                     <div className="grid md:grid-cols-2 grid-cols-1 gap-10 gap-y-20 ">
                      
                         {movies.map((movie,index)=>(
-                            <Link to={`/${movie._id}/description`} key={index} data-aos="zoom-in">
-                                  <MovieCart movie={movie}/>
+                            <Link to={`/${movie._id}/description`} key={index} 
+                            {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>
+                                  <MovieCart movie={movie} hamburgerClicked={hamburgerClicked}/>
                             </Link>
                         ))}
                       </div>

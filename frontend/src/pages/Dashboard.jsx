@@ -102,13 +102,13 @@ const Dashboard = ()=>{
 
                          {
                             currentBtn === "Home" ? <Home /> :  
-                            currentBtn === "Movies" && user === "admin" ? <AdminMovies /> : 
-                            currentBtn === "Add Movie" ? <AddMovie /> : currentBtn === "Bookings"?<Booking />:""
+                            currentBtn === "Movies" && user === "admin" ? <AdminMovies hamburgerClicked={hamburgerClicked}/> : 
+                            currentBtn === "Add Movie" ? <AddMovie hamburgerClicked={hamburgerClicked} /> : currentBtn === "Bookings"?<Booking  hamburgerClicked={hamburgerClicked}/>:""
                         }
 
                     <div className={`transition-all duration-300 ${hamburgerClicked ? "hidden sm:w-[75vw] md:w-[80vw] lg:w-[85vw] sm:flex justify-end" : "w-full"}`}>
 
-                       { currentBtn === "Movies" && user === "user" ? <Movies />:"" }
+                       { currentBtn === "Movies" && user === "user" ? <Movies hamburgerClicked={hamburgerClicked}/>:"" }
 
                         </div>
 
