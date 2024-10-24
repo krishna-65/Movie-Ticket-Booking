@@ -12,13 +12,13 @@ const Movie_bookings = ()=>{
   useEffect(()=>{
     setMovieBookings(bookings.filter((booking)=>booking.movie === id));
   },[])
-        console.log(movieBookings);
-        if(!movieBookings)
+      
+        if(movieBookings.length === 0)
         {
             return <div className="min-h-screen bg-[#242530] p-10">
-                <h2 className="font-mono text-white font-semibold text-2xl">Bookings for <span className="text-green-400">{movie.title}</span></h2>
+                <h2 className="font-mono text-center text-white font-semibold text-2xl">Bookings for <span className="text-green-400">{movie.title}</span></h2>
                 <div className="h-[80vh] flex justify-center items-center">
-                <h2 className="text-white font-semibold font-mono">Booking Not Found</h2>
+                <h2 className="text-white text-4xl font-semibold font-mono">Booking Not Found</h2>
             </div>
             </div>
         }

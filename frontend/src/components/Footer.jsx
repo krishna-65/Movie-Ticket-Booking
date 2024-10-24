@@ -4,14 +4,14 @@ import { FaInstagram } from "react-icons/fa";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-const Footer = () => {
+const Footer = ({hamburgerClicked}) => {
 
   useEffect(()=>{
     Aos.init({duration: 1000});
  },[])
 
     return (
-      <footer className="bg-[#31323f] hover:shadow-xl hover:shadow-[#00aaff66] mt-10 rounded-md shadow text-white py-8 w-[90%] mx-auto " data-aos="zoom-in">
+      <footer className="bg-[#31323f] hover:shadow-xl hover:shadow-[#00aaff66] mt-10 rounded-md shadow text-white py-8 w-[90%] mx-auto " {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>
         <div className="container mx-auto px-4 md:px-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
@@ -76,7 +76,7 @@ const Footer = () => {
               <a href="https://facebook.com" className=" hover:text-white">
               <FaFacebook  className="text-xl sm:text-3xl"/>
               </a>
-              <a href="https://twitter.com" className=" hover:text-white">
+              <a href="https://www.linkedin.com/in/krishna-kant-8a7a59273" className=" hover:text-white">
               <FaLinkedin  className="text-xl sm:text-3xl"/>
               </a>
               <a href="https://www.instagram.com/krishna_52_/profilecard/?igsh=ZG1ycG8yaDN6dDBj" className=" hover:text-white">

@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Aos from 'aos'
-const Review = ({userLogin,userId}) => {
+const Review = ({userLogin,userId,hamburgerClicked}) => {
   const [reviews, setReviews] = useState([]);
-  console.log(userId);
+ 
   useEffect(()=>{
     Aos.init({duration:1000})
   },[])
@@ -36,13 +36,13 @@ const Review = ({userLogin,userId}) => {
 
   return (
     <div className="bg-[#242530] my-10 relative overflow-hidden">
-      <div className="gap-8 flex mx-auto flex-col justify-center items-center w-[90%] text-white" data-aos="zoom-in">
+      <div className="gap-8 flex mx-auto flex-col justify-center items-center w-[90%] text-white"  {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>
         <h1 className="text-2xl font-semibold">Reviews</h1>
 
         {/* Review Slider */}
         <div className="relative w-full overflow-hidden">
           <div
-            className="flex whitespace-nowrap animate-slide-loop" // Add animation class
+            className={`flex whitespace-nowrap ${hamburgerClicked?'':'animate-slide-loop'}`} // Add animation class
             style={{ width: reviews.length * 400 * 2 }} // Adjust based on the number of reviews
           >
             {/* Duplicate reviews for infinite scroll effect */}

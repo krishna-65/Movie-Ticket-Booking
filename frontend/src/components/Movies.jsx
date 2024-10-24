@@ -37,7 +37,7 @@ const Movies = ({hamburgerClicked})=>{
   return(
     <div >
                 <div className="w-[90vw] mx-auto p-10  mt-10">
-                        <h2 className="text-center font-semibold text-2xl text-white my-4" data-aos="zoom-in">Latest Release Movies</h2> 
+                        <h2 className="text-center font-semibold text-2xl text-white my-4"  {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>Latest Release Movies</h2> 
 
                     <div className="grid md:grid-cols-2 grid-cols-1 gap-10 gap-y-20 ">
                      

@@ -25,10 +25,10 @@ const MovieDescription = () => {
         }
     }, []);
 
-    if (!movie) {
+    if (movie.length < 1 ) {
         return <p>Loading...</p>;} // Or handle error
 
-        console.log(user);
+
 
     return (
         <div className="min-h-screen w-[100vw] bg-gradient-to-r from-[#0a0d1c] to-[#2c3e50] flex flex-col md:flex-row gap-10 p-10 items-center justify-center">

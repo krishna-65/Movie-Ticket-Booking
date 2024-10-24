@@ -101,7 +101,7 @@ const Dashboard = ()=>{
 
 
                          {
-                            currentBtn === "Home" ? <Home /> :  
+                            currentBtn === "Home" ? <Home  hamburgerClicked={hamburgerClicked}/> :  
                             currentBtn === "Movies" && user === "admin" ? <AdminMovies hamburgerClicked={hamburgerClicked}/> : 
                             currentBtn === "Add Movie" ? <AddMovie hamburgerClicked={hamburgerClicked} /> : currentBtn === "Bookings"?<Booking  hamburgerClicked={hamburgerClicked}/>:""
                         }

@@ -8,7 +8,7 @@ import Review from "../components/Review"
 import { jwtDecode } from "jwt-decode";
 
 
-const Home = ()=>{
+const Home = ({hamburgerClicked})=>{
 
   const [userLogin,setUSerLogin] = useState(false);
   const [userId, setUserId] = useState('');
@@ -24,7 +24,7 @@ const Home = ()=>{
 
     
     return (
-      <div className={`bg-[#242530] ${userLogin?"pt-0":"pt-5"} pb-5`}>
+      <div className={`bg-[#242530] ${userLogin?"pt-0":"pt-5"} pb-5 min-h-screen`}>
         <section className={`${userLogin?"hidden":"block"}`}>
                <Navbar/>
         </section>
@@ -32,13 +32,13 @@ const Home = ()=>{
             <Hero/> 
         </section>
         <section id="movies">
-            <Movies/>
+            <Movies hamburgerClicked={hamburgerClicked}/>
         </section>
         <section >
-          <Review userLogin={userLogin} userId={userId}/>
+          <Review userLogin={userLogin} userId={userId} hamburgerClicked={hamburgerClicked}/>
         </section>
       <section id="about">
-          <Footer/>
+          <Footer hamburgerClicked={hamburgerClicked}/>
       </section>
     
       </div>

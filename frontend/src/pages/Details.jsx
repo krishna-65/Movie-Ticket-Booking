@@ -51,33 +51,6 @@ const Details = ()=>{
    if(dateTime)
     { formattedDate = dateTime.toString().split('GMT')[0].trim();}
 
-  // Function to combine date and time into a Date object
-  // function createDateTimeObject(dateString, timeString) {
-  //   // Convert date from "DD-MM-YYYY" format to "YYYY-MM-DD"
-  //   if(dateString)
-  //   {
-  //       const [day, month, year] = dateString.split('-');
-  //       const formattedDate = `${year}-${month}-${day}`;
-  //   }
-    
-  //   // Function to convert 12-hour time format to 24-hour format (e.g., 10AM -> 10:00)
-  //   function convertTo24Hour(time12h) {
-  //     const period = time12h.slice(-2); // Extract AM/PM
-  //     let [hours] = time12h.slice(0, -2).split(':');
-      
-  //     // Handle 12-hour to 24-hour conversion
-  //     if (period === 'PM' && hours !== '12') hours = parseInt(hours) + 12;
-  //     if (period === 'AM' && hours === '12') hours = '00';
-      
-  //     return hours.padStart(2, '0') + ':00'; // Add minutes as "00"
-  //   }
-
-  // //  Combine formatted date with the converted time
-  //   const dateTimeString = `${formattedDate}T${convertTo24Hour(timeString)}:00.000Z`;
-  //   const dateTime = new Date(dateTimeString); // Create Date object
-
-  //   return dateTime;
-  // }
 
   const [movie,setMovie] = useState([]);
   const MovieName = useSelector((state)=>state.movie.movies);

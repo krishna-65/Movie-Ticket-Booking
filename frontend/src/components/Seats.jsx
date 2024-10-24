@@ -17,25 +17,28 @@ const SeatSelection = ({ objSeat, className }) => {
   const premiumSeats = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]; // Example of premium seats
 
   const handleSeatSelect = (seatIndex) => {
-    if (selectedSeats.includes(seatIndex)) {
+    const seatNumber = seatIndex + 1; // Seat numbers from 1 to 50
+
+    if (selectedSeats.includes(seatNumber)) {
       // Deselect the seat
       setSelectedSeats([]);
       setPrice(0);
     } else {
       // Select the seat
-      setSelectedSeats([seatIndex]);
-      setPrice(premiumSeats.includes(seatIndex) ? 200 : 150);
+      setSelectedSeats([seatNumber]);
+      setPrice(premiumSeats.includes(seatNumber) ? 200 : 150);
     }
   };
 
   const renderSeat = (index) => {
-    const isPremium = premiumSeats.includes(index);
-    const isSelected = selectedSeats.includes(index);
+    const seatNumber = index + 1; // Seat numbers from 1 to 50
+    const isPremium = premiumSeats.includes(seatNumber);
+    const isSelected = selectedSeats.includes(seatNumber);
 
     let bgColor = isPremium ? '#ffcc00' : '#3a3b4d'; // Premium seats in gold, regular in gray
     if (isSelected) bgColor = '#00FF00'; // Selected seat in green
 
-    const booked = bookings.some((booking) => booking.seatNumber == index + 1);
+    const booked = bookings.some((booking) => booking.seatNumber === seatNumber);
     const isDisabled = selectedSeats.length > 0 && !isSelected; // Disable other seats when one is selected
 
     return (
