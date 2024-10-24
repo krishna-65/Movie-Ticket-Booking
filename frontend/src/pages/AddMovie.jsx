@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { addMovie, addMovieInServer } from "../store/reducers/Movie-reducer";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const AddMovie = ()=>{
+const AddMovie = ({hamburgerClicked})=>{
    
   const [loading ,setLoading]  = useState(false);
 
@@ -101,11 +101,11 @@ const AddMovie = ()=>{
  
 
     return(
-        <div className="bg-[#242530]  flex flex-col md:flex-row gap-24 items-center sm:px-10 py-2">
+        <div className="bg-[#242530]  flex flex-col md:flex-row gap-24 items-center sm:px-10 py-2 pt-100px">
                 <div className="w-[50%] rounded-md" >
                     <img src="https://www.shutterstock.com/image-photo/woman-holding-smartphone-buying-movie-600nw-2156185629.jpg" loading="lazy" alt="image" className="w-full h-full rounded-md shadow" />
                 </div>
-                <div className="w-full md:w-[50%]  px-4  shadow flex flex-col items-center" data-aos="zoom-in">
+                <div className="w-full md:w-[50%]  px-4  shadow flex flex-col items-center"  {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>
 
                         <form className="flex flex-col w-full" onSubmit={handleSubmit}>
 

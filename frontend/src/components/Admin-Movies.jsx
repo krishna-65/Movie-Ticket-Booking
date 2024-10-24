@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 
 
 
-const AdminMovies = ()=>{
+const AdminMovies = ({hamburgerClicked})=>{
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movie.adminMovies); // Access the adminId from state
 
@@ -43,7 +43,7 @@ const AdminMovies = ()=>{
                        <div className="grid w-[90%] flex-wrap grid-cols-1 md:grid-cols-2  gap-20 ">
                         {movies.map((movie,index)=>(
                             <Link to={`/${movie._id}/description`} key={index}  >
-                                  <MovieCart movie={movie}/>
+                                  <MovieCart movie={movie} hamburgerClicked={hamburgerClicked}/>
                             </Link>
                         ))}
                          </div>

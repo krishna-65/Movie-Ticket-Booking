@@ -73,7 +73,7 @@ const Footer = ({hamburgerClicked}) => {
           <div>
             <h4 className="text-xl font-semibold mb-4 text-gray-200">Follow Us</h4>
             <div className="flex space-x-6">
-              <a href="https://facebook.com" className=" hover:text-white">
+              <a href="https://www.facebook.com/krishankant.sharma.18400700?mibextid=ZbWKwL" className=" hover:text-white">
               <FaFacebook  className="text-xl sm:text-3xl"/>
               </a>
               <a href="https://www.linkedin.com/in/krishna-kant-8a7a59273" className=" hover:text-white">
