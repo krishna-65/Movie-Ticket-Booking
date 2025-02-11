@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Aos from 'aos'
 const Review = ({userLogin,userId,hamburgerClicked}) => {
   const [reviews, setReviews] = useState([]);
- 
+ const [loading,setLoading] =useState(false);
   useEffect(()=>{
     Aos.init({duration:1000})
   },[])
@@ -12,11 +12,13 @@ const Review = ({userLogin,userId,hamburgerClicked}) => {
   useEffect(() => {
     const getAllReviews = async () => {
       try {
+        setLoading(true);
         const response = await axios.get("https://movie-ticket-booking-backend-7y20.onrender.com/review/getallreview");
         setReviews(response.data.response);
       } catch (error) {
         console.log("Error getting all reviews", error);
       }
+      setLoading(false);
     };
     getAllReviews();
   }, []);
@@ -33,6 +35,14 @@ const Review = ({userLogin,userId,hamburgerClicked}) => {
     }
     return stars;
   };
+
+  if(loading)
+    return (
+   <div className="flex justify-center min-h-[500px] items-center w-full text-white flex-col  gap-20">
+        <h2 className="text-center font-semibold text-2xl text-white my-4"  {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>Reviews</h2> 
+          <p className="text-2xl font-semibold">Loading...</p>
+   </div>
+  )
 
   return (
     <div className="bg-[#242530] my-10 relative overflow-hidden">

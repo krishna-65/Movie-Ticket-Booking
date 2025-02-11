@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Aos from "aos";
 import MovieCart from "./reusable-component/MovieCart";
 import "aos/dist/aos.css";
@@ -10,16 +10,18 @@ const Movies = ({hamburgerClicked})=>{
 
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movie.movies); // Access the movies from state
-
+  const [loading,setLoading] = useState(false);
 
     useEffect(()=>{
         const fun1 = async()=>{
           try{
+            setLoading(true);
                     const response = await dispatch(fetchMovies());
 
           }catch(error){
             console.log('error fetching movies', error);
           }
+          setLoading(false);
         }
         fun1();
     },[])
@@ -28,9 +30,10 @@ const Movies = ({hamburgerClicked})=>{
      Aos.init({duration: 1000});
   },[])
 
-       if(!movies)
+       if(loading)
         return (
-       <div className="flex justify-center min-h-[500px] items-center w-full text-white">
+       <div className="flex justify-center min-h-[500px] items-center w-full text-white flex-col  gap-20">
+            <h2 className="text-center font-semibold text-2xl text-white my-4"  {...(!hamburgerClicked && {'data-aos':'zoom-in'})}>Latest Release Movies</h2> 
               <p className="text-2xl font-semibold">Loading...</p>
        </div>
       )

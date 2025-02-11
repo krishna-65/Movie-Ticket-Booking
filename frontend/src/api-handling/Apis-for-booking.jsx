@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const API = "https://movie-ticket-booking-backend-7y20.onrender.com";
 
 export const getting_booking = async(userId)=>{
